@@ -43,6 +43,9 @@ public class Block extends Rectangle{
 		case STONE_1:
 			block = Assets.getStone_1();
 			break;
+		case STONE_GROUND_1:
+			block = Assets.getStone_ground_1();
+			break;
 		case WALL_1:
 			block = Assets.getWall_1();
 			break;
@@ -51,6 +54,39 @@ public class Block extends Rectangle{
 			break;
 		case WOOD_FLOOR_1:
 			block = Assets.getWood_floor_1();
+			break;
+		case STONE_WALL_LEFT_1:
+			block = Assets.getStone_wall_left_1();
+			break;
+		case STONE_WALL_TOP_1:
+			block = Assets.getStone_wall_top_1();
+			break;
+		case STONE_WALL_RIGHT_1:
+			block = Assets.getStone_wall_right_1();
+			break;
+		case STONE_WALL_DOWN_1:
+			block = Assets.getStone_wall_down_1();
+			break;
+		case STONE_WALL_CORNER_LEFT_TOP_1:
+			block = Assets.getStone_wall_corner_left_top_1();
+			break;
+		case STONE_WALL_CORNER_RIGHT_TOP_1:
+			block = Assets.getStone_wall_corner_right_top_1();
+			break;
+		case STONE_WALL_CORNER_LEFT_DOWN_1:
+			block = Assets.getStone_wall_corner_left_down_1();
+			break;
+		case STONE_WALL_CORNER_RIGHT_DOWN_1:
+			block = Assets.getStone_wall_corner_right_down_1();
+			break;
+		case STONE_WALL_UP_DOWN_PLATEAU_BOTTOM_1:
+			block = Assets.getStone_wall_up_down_plateau_bottom_1();
+			break;
+		case STONE_WALL_LEFT_RIGHT_PLATEAU_BOTTOM_1:
+			block = Assets.getStone_wall_left_right_plateau_bottom_1();
+			break;
+		case STAIR_1:
+			block = Assets.getStair_1();
 			break;
 		}
 		
@@ -79,10 +115,26 @@ public class Block extends Rectangle{
 	}
 
 	public enum BlockType{
+		//MAP TEXTURE
 		STONE_1,
+		STONE_GROUND_1,
+		//CAVE WALL
+		STONE_WALL_LEFT_1,
+		STONE_WALL_TOP_1,
+		STONE_WALL_RIGHT_1,
+		STONE_WALL_DOWN_1,
+		STONE_WALL_CORNER_LEFT_TOP_1,
+		STONE_WALL_CORNER_RIGHT_TOP_1,
+		STONE_WALL_CORNER_LEFT_DOWN_1,
+		STONE_WALL_CORNER_RIGHT_DOWN_1,
+		STONE_WALL_UP_DOWN_PLATEAU_BOTTOM_1,
+		STONE_WALL_LEFT_RIGHT_PLATEAU_BOTTOM_1,
+		//HOUSE
 		WALL_1,
 		WALL_TOP,
-		WOOD_FLOOR_1
+		WOOD_FLOOR_1,
+		//STAIRS
+		STAIR_1
 	}
 
 	public boolean isSolid() {

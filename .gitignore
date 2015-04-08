@@ -47,4 +47,6 @@ Temporary Items
 .project
 bin/se/angin/dungeonhunter/main/light.png
 bin/se/angin/dungeonhunter/main/playerlight.png
-*.png
+bin/se/angin/dungeonhunter/main/EntitySheet.png
+bin/se/angin/dungeonhunter/main/map.png
+bin/se/angin/dungeonhunter/main/TextureSheet.png

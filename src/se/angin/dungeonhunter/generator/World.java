@@ -110,6 +110,39 @@ public class World {
 					case 0x808080:
 						tiles.blocks.add(new Block(new Vector2F(x * 48, y * 48), BlockType.STONE_1));
 						break;
+					case 0x9B7555:
+						TileManager.blocks.add(new Block(new Vector2F(x * 48, y * 48), BlockType.STONE_GROUND_1));
+						break;
+					case 0x7F5F47:
+						tiles.blocks.add(new Block(new Vector2F(x * 48, y * 48), BlockType.STONE_WALL_LEFT_1).isSolid(true));
+						break;
+					case 0x7F5F48:
+						tiles.blocks.add(new Block(new Vector2F(x * 48, y * 48), BlockType.STONE_WALL_TOP_1).isSolid(true));
+						break;
+					case 0x7F5F49:
+						tiles.blocks.add(new Block(new Vector2F(x * 48, y * 48), BlockType.STONE_WALL_RIGHT_1).isSolid(true));
+						break;
+					case 0x7F5F50:
+						tiles.blocks.add(new Block(new Vector2F(x * 48, y * 48), BlockType.STONE_WALL_DOWN_1).isSolid(true));
+						break;
+					case 0x7F5F51:
+						tiles.blocks.add(new Block(new Vector2F(x * 48, y * 48), BlockType.STONE_WALL_CORNER_LEFT_TOP_1).isSolid(true));
+						break;
+					case 0x7F5F52:
+						tiles.blocks.add(new Block(new Vector2F(x * 48, y * 48), BlockType.STONE_WALL_CORNER_RIGHT_TOP_1).isSolid(true));
+						break;
+					case 0x7F5F53:
+						tiles.blocks.add(new Block(new Vector2F(x * 48, y * 48), BlockType.STONE_WALL_CORNER_LEFT_DOWN_1).isSolid(true));
+						break;
+					case 0x7F5F54:
+						tiles.blocks.add(new Block(new Vector2F(x * 48, y * 48), BlockType.STONE_WALL_CORNER_RIGHT_DOWN_1).isSolid(true));
+						break;
+					case 0x7F5F55:
+						tiles.blocks.add(new Block(new Vector2F(x * 48, y * 48), BlockType.STONE_WALL_UP_DOWN_PLATEAU_BOTTOM_1).isSolid(true));
+						break;
+					case 0x7F5F56:
+						tiles.blocks.add(new Block(new Vector2F(x * 48, y * 48), BlockType.STONE_WALL_LEFT_RIGHT_PLATEAU_BOTTOM_1).isSolid(true));
+						break;
 					case 0x404040:
 						tiles.blocks.add(new Block(new Vector2F(x * 48, y * 48), BlockType.WALL_1).isSolid(true));
 						break;
@@ -118,6 +151,9 @@ public class World {
 						break;
 					case 0x844E3E:
 						tiles.blocks.add(new Block(new Vector2F(x * 48, y * 48), BlockType.WOOD_FLOOR_1));
+						break;
+					case 0x505050:
+						tiles.blocks.add(new Block(new Vector2F(x * 48, y * 48), BlockType.STAIR_1));
 						break;
 					}
 					

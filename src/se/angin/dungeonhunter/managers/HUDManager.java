@@ -23,18 +23,18 @@ public class HUDManager {
 	
 	public HUDManager(World world) {
 		this.world = world;
-		playerLight = LoadImageFrom.LoadImageFrom(Main.class, "playerlight.png");
-		addLights();
+//		playerLight = LoadImageFrom.LoadImageFrom(Main.class, "playerlight.png");
+//		addLights();
 	}
 
-	private void addLights() {
-
-		lights.add(new Light(200, 200, 920, 255));
-		lights.add(new Light(400, 400, 220, 255));
-		lights.add(new Light(350, 300, 220, 155));
-
+//	private void addLights() {
+//
+//		lights.add(new Light(200, 200, 920, 255));
+//		lights.add(new Light(400, 400, 220, 255));
+//		lights.add(new Light(350, 300, 220, 155));
+//
 //		UpdateLights();
-	}
+//	}
 	
 //	public void UpdateLights(){
 //		Graphics2D g = null;
@@ -54,7 +54,7 @@ public class HUDManager {
 
 	public void render(Graphics2D g) {
 		
-		g.drawImage(playerLight, 0, 0, Main.width, Main.height, null);
+//		g.drawImage(playerLight, 0, 0, Main.width, Main.height, null);
 //		g.drawImage(lightMap, (int) lightM.getWorldLocation().xPos, (int) lightM.getWorldLocation().yPos, null);
 		
 		g.setColor(Color.BLACK);
