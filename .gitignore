@@ -45,3 +45,6 @@ Temporary Items
 .settings/org.eclipse.jdt.core.prefs
 *.classpath
 .project
+bin/se/angin/dungeonhunter/main/light.png
+bin/se/angin/dungeonhunter/main/playerlight.png
+*.png
