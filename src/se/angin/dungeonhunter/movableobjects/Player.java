@@ -11,6 +11,7 @@ import java.util.ArrayList;
 
 import se.angin.dungeonhunter.gameloop.GameLoop;
 import se.angin.dungeonhunter.gamestate.GameStateButton;
+import se.angin.dungeonhunter.gamestates.DungeonLevelLoader;
 import se.angin.dungeonhunter.generator.World;
 import se.angin.dungeonhunter.main.Animator;
 import se.angin.dungeonhunter.main.Assets;
@@ -76,6 +77,7 @@ public class Player implements KeyListener {
 	
 	private HUDManager hudManager;
 	private GUIManager guiManager;
+	private PlayerActions playerActions;
 	
 	public Player() {
 		pos = new Vector2F(Main.width / 2 - width / 2, Main.height / 2 - height
@@ -84,6 +86,7 @@ public class Player implements KeyListener {
 
 	public void init(World world) {
 
+		playerActions = new PlayerActions(world);
 		hudManager = new HUDManager(world);
 		guiManager = new GUIManager();
 		this.world = world;
@@ -152,6 +155,8 @@ public class Player implements KeyListener {
 	public void tick(double deltaTime) {
 		
 		playerMM.tick();
+		
+		playerActions.tick();
 
 		render = new Rectangle(
 				(int) (pos.xPos - pos.getWorldLocation().xPos + pos.xPos - renderDistanceWidth*32/2 + width/2), 
@@ -418,7 +423,11 @@ public class Player implements KeyListener {
 					speedUp = 0;
 				}
 			}
-			world.mapPos.yPos -= speed;
+//			if (!mapMove) {
+//				pos.yPos -= speed;
+//			}else{
+				world.mapPos.yPos -= speed;
+//			}
 			
 		}else{
 			speedUp = 0;
@@ -540,6 +549,46 @@ public class Player implements KeyListener {
 
 	public void render(Graphics2D g) {
 		
+		if(playerActions.attack_state != null){
+			if(!playerActions.hasCompleted){
+				if(playerActions.attack){
+					
+					if(playerActions.getAttack_state() == Assets.getAttack_up()){
+						g.drawImage(playerActions.attack_state, 
+								(int) pos.xPos - width/2, 
+								(int) pos.yPos - height - 16,
+								width * scale, 
+								height * scale, 
+								null);
+					}
+					if(playerActions.getAttack_state() == Assets.getAttack_down()){
+						g.drawImage(playerActions.attack_state, 
+								(int) pos.xPos - width/2, 
+								(int) pos.yPos - height + 16*3,
+								width * scale, 
+								height * scale, 
+								null);
+					}
+					if(playerActions.getAttack_state() == Assets.getAttack_right()){
+						g.drawImage(playerActions.attack_state, 
+								(int) pos.xPos - width/2  + 16*3, 
+								(int) pos.yPos - height,
+								width * scale, 
+								height * scale, 
+								null);
+					}
+					if(playerActions.getAttack_state() == Assets.getAttack_left()){
+						g.drawImage(playerActions.attack_state, 
+								(int) pos.xPos - width/2  - 16*3, 
+								(int) pos.yPos - height,
+								width * scale, 
+								height * scale, 
+								null);
+					}
+				}
+			}
+		}
+		
 		//UP
 		if(animationState == 0){
 			g.drawImage(ani_up.sprite, (int) pos.xPos - width/2, (int) pos.yPos - height, width * scale, height * scale, null);
@@ -573,6 +622,8 @@ public class Player implements KeyListener {
 			g.drawImage(ani_idel.sprite, (int) pos.xPos - width/2, (int) pos.yPos - height, width * scale, height * scale, null);
 			ani_idel.update(System.currentTimeMillis());
 		}
+		
+		
 		
 		g.drawRect((int) pos.xPos - renderDistanceWidth*32/2 + width/2, (int) pos.yPos - renderDistanceHeight*32/2 + height/2, renderDistanceWidth*32, renderDistanceHeight*32);
 
@@ -640,6 +691,10 @@ public class Player implements KeyListener {
 		if (key == KeyEvent.VK_D) {
 			right = false;
 		}
+		if (key == KeyEvent.VK_P) {
+			DungeonLevelLoader.world.changeToWorld("World2", "map2");
+			//world.changeToWorld("World2", "map2");
+		}
 		if (key == KeyEvent.VK_SHIFT) {
 			running= false;
 		}
@@ -676,5 +731,86 @@ public class Player implements KeyListener {
 	
 	public boolean hasSpawned(){
 		return spawned;
+	}
+	
+	public PlayerActions getPlayerActions() {
+		return playerActions;
+	}
+	
+	
+	
+	
+	public static class PlayerActions{
+		
+		private World world;
+		private BufferedImage attack_state;
+		private static boolean hasCompleted = true;
+		private static boolean attack = false;
+		private double attackTime = 1;
+
+		public PlayerActions(World world) {
+			this.world = world;
+		}
+		
+		public void tick(){
+			if(!hasCompleted){
+				if(attack){
+					if(attack_state != null){
+						startAttack();
+					}
+				}
+			}
+		}
+		
+		private void startAttack() {
+			if(attackTime != 0){
+				attackTime -= 0.1;
+			}
+			if(attackTime <= 0){
+				attack = false;
+				hasCompleted = true;
+				attack_state = null;
+				attackTime = 1;
+			}
+		}
+
+		public void attackUp(){
+			attack_state = Assets.getAttack_up();
+			attack = true;
+			hasCompleted = false;
+		}
+		public void attackDown(){
+			attack_state = Assets.getAttack_down();
+			attack = true;
+			hasCompleted = false;
+		}
+		public void attackRight(){
+			attack_state = Assets.getAttack_right();
+			attack = true;
+			hasCompleted = false;
+		}
+		public void attackLeft(){
+			attack_state = Assets.getAttack_left();
+			attack = true;
+			hasCompleted = false;
+		}
+		public void run(){
+			
+		}
+		
+		public BufferedImage getAttack_state() {
+			return attack_state;
+		}
+
+		public boolean hasCompleted() {
+			return hasCompleted;
+		}
+		
+		public boolean attacked(){
+			return attack;
+		}
+		public double getAttackTime() {
+			return attackTime;
+		}
 	}
 }

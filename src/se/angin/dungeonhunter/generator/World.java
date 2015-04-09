@@ -5,6 +5,7 @@ import java.awt.image.BufferedImage;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import se.angin.dungeonhunter.gamestate.GameStateManager;
+import se.angin.dungeonhunter.gamestates.DungeonLevelLoader;
 import se.angin.dungeonhunter.generator.Block.BlockType;
 import se.angin.dungeonhunter.main.Main;
 import se.angin.dungeonhunter.movableobjects.Player;
@@ -19,7 +20,7 @@ public class World {
 	private int worldWidth;
 	private int worldHeight;
 	private int blockSize = 48;
-	private Player player;
+	private static Player player;
 	private boolean hasGenerated;
 	
 	//LISTS
@@ -31,9 +32,11 @@ public class World {
 	
 	//BOOLEANS
 	private boolean hasSize = false;
+	private GameStateManager gsm;
 	
-	public World(String worldName) {
+	public World(String worldName, GameStateManager gsm) {
 		this.worldName = worldName;
+		this.gsm = gsm;
 		Vector2F.setWorldVaribles(mapPos.xPos, mapPos.yPos);
 	}
 
@@ -217,11 +220,27 @@ public class World {
 		return tiles;
 	}
 	
-	public Player getPlayer() {
+	public static Player getPlayer() {
 		return player;
 	}
 	
 	public boolean hasGenerated() {
 		return hasGenerated;
 	}
+	
+	public void resetWorld(){
+		tiles.getBlocks().clear();
+		tiles.getLoadedBlocks().clear();
+		blockEntities.clear();
+		spawn=null;
+	}
+	
+	public void changeToWorld(String worldName, String mapName){
+		if(worldName != this.worldName){
+			resetWorld();
+			gsm.states.push(new DungeonLevelLoader(gsm, worldName, mapName));
+			gsm.states.peek().init();
+		}
+	}
+
 }

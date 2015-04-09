@@ -10,21 +10,34 @@ import se.angin.dungeonhunter.movableobjects.Player;
 
 public class DungeonLevelLoader extends GameState{
 	
-	World world;
+	public static World world;
+	private String worldName;
+	private String mapName;
 	
 	public DungeonLevelLoader(GameStateManager gsm) {
 		super(gsm);
 	}
+	
+	public DungeonLevelLoader(GameStateManager gsm, String worldName, String mapName) {
+		super(gsm);
+		this.worldName = worldName;
+		this.mapName = mapName;
+	}
 
 	@Override
 	public void init() {
-		world = new World("World");
+		
+		if(worldName == null){
+			worldName = "NULL";
+			mapName = "map";
+		}
+		world = new World(worldName, gsm);
 		world.setSize(100, 100);
 		world.setWorldSpawn(8, 8);
 		world.addPlayer(new Player());
 		
 		world.init();
-		world.generate("map");
+		world.generate(mapName);
 	}
 
 	@Override
@@ -41,5 +54,4 @@ public class DungeonLevelLoader extends GameState{
 		}
 		g.clipRect(0, 0, Main.width, Main.height);
 	}
-
 }

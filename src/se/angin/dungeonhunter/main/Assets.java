@@ -10,6 +10,12 @@ public class Assets {
 	SpriteSheet blocks = new SpriteSheet();
 	public static SpriteSheet player = new SpriteSheet();
 
+	//PLAYER ATTACK
+	public static BufferedImage attack_up;
+	public static BufferedImage attack_down;
+	public static BufferedImage attack_right;
+	public static BufferedImage attack_left;
+	
 	//MOUSE TEXTURE
 	public static BufferedImage mouse_pressed;
 	public static BufferedImage mouse_realesed;
@@ -47,6 +53,12 @@ public class Assets {
 		blocks.setSpriteSheet(LoadImageFrom.LoadImageFrom(Main.class, "TextureSheet.png"));
 		player.setSpriteSheet(LoadImageFrom.LoadImageFrom(Main.class, "EntitySheet.png"));
 
+		//PLAYER ATTACK
+		attack_up = player.getTile(0, 48, 16, 16);
+		attack_down = player.getTile(16, 48, 16, 16);
+		attack_right = player.getTile(32, 48, 16, 16);
+		attack_left = player.getTile(48, 48, 16, 16);
+		
 		//MOUSE TEXTURE
 		mouse_realesed = player.getTile(64+32, 8, 8, 8);
 		mouse_pressed = player.getTile(64+32+8, 8, 8, 8);
@@ -141,5 +153,17 @@ public class Assets {
 	}
 	public static BufferedImage getStone_wall_left_right_plateau_bottom_1() {
 		return stone_wall_left_right_plateau_bottom_1;
+	}
+	public static BufferedImage getAttack_up() {
+		return attack_up;
+	}
+	public static BufferedImage getAttack_down() {
+		return attack_down;
+	}
+	public static BufferedImage getAttack_right() {
+		return attack_right;
+	}
+	public static BufferedImage getAttack_left() {
+		return attack_left;
 	}
 }
