@@ -46,7 +46,7 @@ public class Player implements KeyListener {
 	private static boolean moving;
 	private static boolean spawned;
 	
-	MouseManager playerMM = new MouseManager();
+	private static boolean attack;
 
 	
 	//Rendering
