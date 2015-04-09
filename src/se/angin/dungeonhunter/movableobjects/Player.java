@@ -1,25 +1,19 @@
 package se.angin.dungeonhunter.movableobjects;
 
-import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
-import java.util.ArrayList;
 
-import se.angin.dungeonhunter.gameloop.GameLoop;
-import se.angin.dungeonhunter.gamestate.GameStateButton;
 import se.angin.dungeonhunter.gamestates.DungeonLevelLoader;
 import se.angin.dungeonhunter.generator.World;
-import se.angin.dungeonhunter.main.Animator;
 import se.angin.dungeonhunter.main.Assets;
 import se.angin.dungeonhunter.main.Check;
 import se.angin.dungeonhunter.main.Main;
 import se.angin.dungeonhunter.managers.GUIManager;
 import se.angin.dungeonhunter.managers.HUDManager;
-import se.angin.dungeonhunter.managers.MouseManager;
 import se.angin.gop.main.Vector2F;
 
 public class Player implements KeyListener {
@@ -41,7 +35,6 @@ public class Player implements KeyListener {
 	private float slowDown = 4.093F;
 
 	private float fixDt = 1f / 60F;
-	private long animationSpeed = 180;
 	
 	private static boolean moving;
 	private static boolean attacking;
@@ -55,30 +48,7 @@ public class Player implements KeyListener {
 	
 	private int animationState = 0;
 	private static int lastAnimationState;
-	/*
-	 * 0 = up
-	 * 1 = down
-	 * 2 = right
-	 * 3 = left
-	 * 4 = idel
-	 * */
-
-	private ArrayList<BufferedImage> listUp;
-	Animator ani_up;
-	private ArrayList<BufferedImage> listDown;
-	Animator ani_down;
-	private ArrayList<BufferedImage> listRight;
-	Animator ani_right;
-	private ArrayList<BufferedImage> listLeft;
-	Animator ani_left;
-	private ArrayList<BufferedImage> listIdelUp;
-	Animator ani_idel_up;
-	private ArrayList<BufferedImage> listIdelDown;
-	Animator ani_idel_down;
-	private ArrayList<BufferedImage> listIdelRight;
-	Animator ani_idel_right;
-	private ArrayList<BufferedImage> listIdelLeft;
-	Animator ani_idel_left;
+	
 	
 	private HUDManager hudManager;
 	private GUIManager guiManager;
@@ -101,86 +71,7 @@ public class Player implements KeyListener {
 				renderDistanceWidth*32, 
 				renderDistanceHeight*32);
 		
-		listUp = new ArrayList<BufferedImage>();
-		listDown = new ArrayList<BufferedImage>();
-		listRight = new ArrayList<BufferedImage>();
-		listLeft = new ArrayList<BufferedImage>();
-		listIdelUp = new ArrayList<BufferedImage>();
-		listIdelDown = new ArrayList<BufferedImage>();
-		listIdelRight = new ArrayList<BufferedImage>();
-		listIdelLeft = new ArrayList<BufferedImage>();
-
-		listUp.add(Assets.player.getTile(0, 0, 16, 16));
-		listUp.add(Assets.player.getTile(16, 0, 16, 16));
 		
-		listDown.add(Assets.player.getTile(0, 16, 16, 16));
-		listDown.add(Assets.player.getTile(16, 16, 16, 16));
-
-		listRight.add(Assets.player.getTile(32, 16, 16, 16));
-		listRight.add(Assets.player.getTile(48, 16, 16, 16));
-		listRight.add(Assets.player.getTile(64, 16, 16, 16));
-		listRight.add(Assets.player.getTile(80, 16, 16, 16));
-
-		listLeft.add(Assets.player.getTile(32, 0, 16, 16));
-		listLeft.add(Assets.player.getTile(48, 0, 16, 16));
-		listLeft.add(Assets.player.getTile(64, 0, 16, 16));
-		listLeft.add(Assets.player.getTile(80, 0, 16, 16));
-
-
-		listIdelUp.add(Assets.player.getTile(64, 32, 16, 16));
-		
-		listIdelDown.add(Assets.player.getTile(0, 32, 16, 16));
-		listIdelDown.add(Assets.player.getTile(16, 32, 16, 16));
-		listIdelDown.add(Assets.player.getTile(32, 32, 16, 16));
-		listIdelDown.add(Assets.player.getTile(48, 32, 16, 16));
-
-		listIdelRight.add(Assets.player.getTile(0, 48, 16, 16));
-		listIdelRight.add(Assets.player.getTile(16, 48, 16, 16));
-		listIdelRight.add(Assets.player.getTile(32, 48, 16, 16));
-		listIdelRight.add(Assets.player.getTile(48, 48, 16, 16));
-		
-		listIdelLeft.add(Assets.player.getTile(0, 64, 16, 16));
-		listIdelLeft.add(Assets.player.getTile(16, 64, 16, 16));
-		listIdelLeft.add(Assets.player.getTile(32, 64, 16, 16));
-		listIdelLeft.add(Assets.player.getTile(48, 64, 16, 16));
-		
-		
-		//UP
-		ani_up = new Animator(listUp);
-		ani_up.setSpeed(animationSpeed);
-		ani_up.play();
-
-		//DOWN
-		ani_down = new Animator(listDown);
-		ani_down.setSpeed(animationSpeed);
-		ani_down.play();
-		
-		//RIGHT
-		ani_right = new Animator(listRight);
-		ani_right.setSpeed(animationSpeed);
-		ani_right.play();
-		
-		//LEFT
-		ani_left = new Animator(listLeft);
-		ani_left.setSpeed(animationSpeed);
-		ani_left.play();
-		
-		//IDEL UP
-		ani_idel_up = new Animator(listIdelUp);
-		ani_idel_up.setSpeed(animationSpeed);
-		ani_idel_up.play();
-		//IDEL DOWN
-		ani_idel_down = new Animator(listIdelDown);
-		ani_idel_down.setSpeed(animationSpeed);
-		ani_idel_down.play();
-		//IDEL RIGHT
-		ani_idel_right = new Animator(listIdelRight);
-		ani_idel_right.setSpeed(animationSpeed);
-		ani_idel_right.play();
-		//IDEL LEFT
-		ani_idel_left = new Animator(listIdelLeft);
-		ani_idel_left.setSpeed(animationSpeed);
-		ani_idel_left.play();
 		
 		spawned = true;
 	}
@@ -245,23 +136,23 @@ public class Player implements KeyListener {
 			}
 		}
 		if(running){
-			if(animationSpeed != 100){
-				animationSpeed = 100;
-				ani_up.setSpeed(animationSpeed);
-				ani_down.setSpeed(animationSpeed);
-				ani_right.setSpeed(animationSpeed);
-				ani_left.setSpeed(animationSpeed);
-				ani_idel_up.setSpeed(animationSpeed);
+			if(Assets.animationSpeed != 100){
+				Assets.animationSpeed = 100;
+				Assets.ani_up.setSpeed(Assets.animationSpeed);
+				Assets.ani_down.setSpeed(Assets.animationSpeed);
+				Assets.ani_right.setSpeed(Assets.animationSpeed);
+				Assets.ani_left.setSpeed(Assets.animationSpeed);
+				Assets.ani_idel_up.setSpeed(Assets.animationSpeed);
 				maxSpeed += 64;
 			}
 		}else{
-			if(animationSpeed != 180){
-				animationSpeed = 180;
-				ani_up.setSpeed(animationSpeed);
-				ani_down.setSpeed(animationSpeed);
-				ani_right.setSpeed(animationSpeed);
-				ani_left.setSpeed(animationSpeed);
-				ani_idel_up.setSpeed(animationSpeed);
+			if(Assets.animationSpeed != 180){
+				Assets.animationSpeed = 180;
+				Assets.ani_up.setSpeed(Assets.animationSpeed);
+				Assets.ani_down.setSpeed(Assets.animationSpeed);
+				Assets.ani_right.setSpeed(Assets.animationSpeed);
+				Assets.ani_left.setSpeed(Assets.animationSpeed);
+				Assets.ani_idel_up.setSpeed(Assets.animationSpeed);
 				maxSpeed -= 64;
 			}
 		}
@@ -648,50 +539,50 @@ public class Player implements KeyListener {
 		
 		//UP
 		if(animationState == 0){
-			g.drawImage(ani_up.sprite, (int) pos.xPos - width/2, (int) pos.yPos - height, width * scale, height * scale, null);
+			g.drawImage(Assets.ani_up.sprite, (int) pos.xPos - width/2, (int) pos.yPos - height, width * scale, height * scale, null);
 			if(up){
-				ani_up.update(System.currentTimeMillis());
+				Assets.ani_up.update(System.currentTimeMillis());
 			}
 		}
 		//DOWN
 		if(animationState == 1){
-			g.drawImage(ani_down.sprite, (int) pos.xPos - width/2, (int) pos.yPos - height, width * scale, height * scale, null);
+			g.drawImage(Assets.ani_down.sprite, (int) pos.xPos - width/2, (int) pos.yPos - height, width * scale, height * scale, null);
 			if(down){
-				ani_down.update(System.currentTimeMillis());
+				Assets.ani_down.update(System.currentTimeMillis());
 			}
 		}
 		//RIGHT
 		if(animationState == 2){
-			g.drawImage(ani_right.sprite, (int) pos.xPos - width/2, (int) pos.yPos - height, width * scale, height * scale, null);
+			g.drawImage(Assets.ani_right.sprite, (int) pos.xPos - width/2, (int) pos.yPos - height, width * scale, height * scale, null);
 			if(right){
-				ani_right.update(System.currentTimeMillis());
+				Assets.ani_right.update(System.currentTimeMillis());
 			}
 		}
 		//LEFT
 		if(animationState == 3){
-			g.drawImage(ani_left.sprite, (int) pos.xPos - width/2, (int) pos.yPos - height, width * scale, height * scale, null);
+			g.drawImage(Assets.ani_left.sprite, (int) pos.xPos - width/2, (int) pos.yPos - height, width * scale, height * scale, null);
 			if(left){
-				ani_left.update(System.currentTimeMillis());
+				Assets.ani_left.update(System.currentTimeMillis());
 			}
 		}
 		//IDEL UP
 		if(animationState == 4){
-			g.drawImage(ani_idel_up.sprite, (int) pos.xPos - width/2, (int) pos.yPos - height, width * scale, height * scale, null);
-			ani_idel_up.update(System.currentTimeMillis());
+			g.drawImage(Assets.ani_idel_up.sprite, (int) pos.xPos - width/2, (int) pos.yPos - height, width * scale, height * scale, null);
+			Assets.ani_idel_up.update(System.currentTimeMillis());
 		}
 		//IDEL DOWN
 		if(animationState == 5){
-			g.drawImage(ani_idel_down.sprite, (int) pos.xPos - width/2, (int) pos.yPos - height, width * scale, height * scale, null);
-			ani_idel_down.update(System.currentTimeMillis());
+			g.drawImage(Assets.ani_idel_down.sprite, (int) pos.xPos - width/2, (int) pos.yPos - height, width * scale, height * scale, null);
+			Assets.ani_idel_down.update(System.currentTimeMillis());
 		}
 		//IDEL RIGHT
 		if(animationState == 6){
-			g.drawImage(ani_idel_right.sprite, (int) pos.xPos - width/2, (int) pos.yPos - height, width * scale, height * scale, null);
-			ani_idel_right.update(System.currentTimeMillis());
+			g.drawImage(Assets.ani_idel_right.sprite, (int) pos.xPos - width/2, (int) pos.yPos - height, width * scale, height * scale, null);
+			Assets.ani_idel_right.update(System.currentTimeMillis());
 		}//IDEL LEFT
 		if(animationState == 7){
-			g.drawImage(ani_idel_left.sprite, (int) pos.xPos - width/2, (int) pos.yPos - height, width * scale, height * scale, null);
-			ani_idel_left.update(System.currentTimeMillis());
+			g.drawImage(Assets.ani_idel_left.sprite, (int) pos.xPos - width/2, (int) pos.yPos - height, width * scale, height * scale, null);
+			Assets.ani_idel_left.update(System.currentTimeMillis());
 		}
 		
 		g.drawRect((int) pos.xPos - renderDistanceWidth*32/2 + width/2, (int) pos.yPos - renderDistanceHeight*32/2 + height/2, renderDistanceWidth*32, renderDistanceHeight*32);
@@ -770,8 +661,10 @@ public class Player implements KeyListener {
 			left = false;
 		}
 		if (key == KeyEvent.VK_P) {
-			DungeonLevelLoader.world.changeToWorld("World2", "map2");
-			//world.changeToWorld("World2", "map2");
+			if(!moving){
+				DungeonLevelLoader.world.changeToWorld("World2", "map2");
+				//world.changeToWorld("World2", "map2");
+			}
 		}
 		if (key == KeyEvent.VK_SHIFT) {
 			running= false;
