@@ -44,10 +44,9 @@ public class Player implements KeyListener {
 	private long animationSpeed = 180;
 	
 	private static boolean moving;
+	private static boolean attacking;
+	private static boolean stoppedAttacking = true;
 	private static boolean spawned;
-	
-	private static boolean attack;
-
 	
 	//Rendering
 	private int renderDistanceWidth = 62;
@@ -188,8 +187,6 @@ public class Player implements KeyListener {
 
 	public void tick(double deltaTime) {
 		
-		playerMM.tick();
-		
 		playerActions.tick();
 
 		render = new Rectangle(
@@ -232,19 +229,15 @@ public class Player implements KeyListener {
 		//Standing still
 		if(!up && !down && !right && !left){
 			if(lastAnimationState == 0){
-				System.out.println("UP");
 				animationState = 4;
 			}
 			if(lastAnimationState == 1){
-				System.out.println("DOWN");
 				animationState = 5;
 			}
 			if(lastAnimationState == 2){
-				System.out.println("RIGHT");
 				animationState = 6;
 			}
 			if(lastAnimationState == 3){
-				System.out.println("LEFT");
 				animationState = 7;				
 			}
 			if(moving){
@@ -271,6 +264,21 @@ public class Player implements KeyListener {
 				ani_idel_up.setSpeed(animationSpeed);
 				maxSpeed -= 64;
 			}
+		}
+		if(attacking){
+			if(animationState == 0 || animationState == 4){
+				playerActions.attackUp();
+			}
+			if(animationState == 1 || animationState == 5){
+				playerActions.attackDown();
+			}
+			if(animationState == 2 || animationState == 6){
+				playerActions.attackRight();
+			}
+			if(animationState == 3 || animationState == 7){
+				playerActions.attackLeft();
+			}
+			attacking = false;
 		}
 	}
 /*
@@ -690,7 +698,6 @@ public class Player implements KeyListener {
 
 		guiManager.render(g);
 		hudManager.render(g);
-		playerMM.render(g);
 	}
 
 	@Override
@@ -723,6 +730,12 @@ public class Player implements KeyListener {
 		}
 		if (key == KeyEvent.VK_SHIFT) {
 			running= true;
+		}
+		if (key == KeyEvent.VK_SPACE) {
+			if(stoppedAttacking){
+				attacking = true;
+				stoppedAttacking = false;
+			}
 		}
 		if (key == KeyEvent.VK_F3) {
 			if(!debug){
@@ -762,6 +775,9 @@ public class Player implements KeyListener {
 		}
 		if (key == KeyEvent.VK_SHIFT) {
 			running= false;
+		}
+		if (key == KeyEvent.VK_SPACE) {
+			stoppedAttacking = true;
 		}
 	}
 

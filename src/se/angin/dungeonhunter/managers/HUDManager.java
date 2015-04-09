@@ -25,10 +25,10 @@ public class HUDManager {
 //		addLights();
 	}
 
-	private static Polygon up;
-	private static Polygon down;
-	private static Polygon right;
-	private static Polygon left;
+//	private static Polygon up;
+//	private static Polygon down;
+//	private static Polygon right;
+//	private static Polygon left;
 
 //	private void addLights() {
 //
@@ -75,41 +75,41 @@ public class HUDManager {
 			g.drawString("[CURRENT_LOADED_WORLD_BLOCKS] " + world.getWorldBlocks().getLoadedBlocks().size(), 30, 210);
 		}
 
-		//UP
-		int[] upX = new int[] {Main.width - 1,Main.width / 2,Main.width / 2,0};
-		int[] upY = new int[] {0,Main.height / 2,Main.height / 2,0};
-		up = new Polygon(upX, upY, upX.length);
-		g.drawPolygon(up);
-		
-		//DOWN
-		int[] downX = new int[] {Main.width - 1,Main.width / 2,Main.width / 2 ,0};
-		int[] downY = new int[] {Main.height - 1,Main.height / 2,Main.height / 2,Main.height - 1};
-		down = new Polygon(downX, downY, downX.length);
-		g.drawPolygon(down);
-		
-		//RIGHT
-		int[] rightX = new int[] {Main.width - 1,Main.width / 2,Main.width / 2,Main.width - 1};
-		int[] rightY = new int[] {Main.height ,Main.height / 2,Main.height / 2,0};
-		right = new Polygon(rightX, rightY, rightX.length);
-		g.drawPolygon(right);
-		
-		//LEFT
-		int[] leftX = new int[] {0,Main.width / 2,Main.width / 2,0};
-		int[] leftY = new int[] {Main.height,Main.height / 2,Main.height / 2,0};
-		left = new Polygon(leftX, leftY, leftX.length);
-		g.drawPolygon(left);
+//		//UP
+//		int[] upX = new int[] {Main.width - 1,Main.width / 2,Main.width / 2,0};
+//		int[] upY = new int[] {0,Main.height / 2,Main.height / 2,0};
+//		up = new Polygon(upX, upY, upX.length);
+//		g.drawPolygon(up);
+//		
+//		//DOWN
+//		int[] downX = new int[] {Main.width - 1,Main.width / 2,Main.width / 2 ,0};
+//		int[] downY = new int[] {Main.height - 1,Main.height / 2,Main.height / 2,Main.height - 1};
+//		down = new Polygon(downX, downY, downX.length);
+//		g.drawPolygon(down);
+//		
+//		//RIGHT
+//		int[] rightX = new int[] {Main.width - 1,Main.width / 2,Main.width / 2,Main.width - 1};
+//		int[] rightY = new int[] {Main.height ,Main.height / 2,Main.height / 2,0};
+//		right = new Polygon(rightX, rightY, rightX.length);
+//		g.drawPolygon(right);
+//		
+//		//LEFT
+//		int[] leftX = new int[] {0,Main.width / 2,Main.width / 2,0};
+//		int[] leftY = new int[] {Main.height,Main.height / 2,Main.height / 2,0};
+//		left = new Polygon(leftX, leftY, leftX.length);
+//		g.drawPolygon(left);
 	}
-	
-	public static Polygon getUpPol() {
-		return up;
-	}
-	public static Polygon getDownPol() {
-		return down;
-	}
-	public static Polygon getRightPol() {
-		return right;
-	}
-	public static Polygon getLeftPol() {
-		return left;
-	}
+//	
+//	public static Polygon getUpPol() {
+//		return up;
+//	}
+//	public static Polygon getDownPol() {
+//		return down;
+//	}
+//	public static Polygon getRightPol() {
+//		return right;
+//	}
+//	public static Polygon getLeftPol() {
+//		return left;
+//	}
 }

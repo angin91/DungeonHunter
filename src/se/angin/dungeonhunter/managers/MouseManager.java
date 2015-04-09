@@ -22,44 +22,44 @@ public class MouseManager implements MouseListener, MouseMotionListener, MouseWh
 	public void tick(){
 		mouse = new Point(mouseMovedX, mouseMovedY);
 		
-		if(World.getPlayer() != null){
-			if(World.getPlayer().getPlayerActions().hasCompleted()){
-				if(!World.getPlayer().getPlayerActions().attacked()){
-					if(HUDManager.getUpPol() != null){
-						if(HUDManager.getUpPol().contains(mouse)){
-							if(pressed){
-								World.getPlayer().getPlayerActions().attackUp();
-								pressed = false;
-							}
-						}
-					}
-					if(HUDManager.getDownPol() != null){
-						if(HUDManager.getDownPol().contains(mouse)){
-							if(pressed){
-								World.getPlayer().getPlayerActions().attackDown();
-								pressed = false;
-							}
-						}
-					}
-					if(HUDManager.getRightPol() != null){
-						if(HUDManager.getRightPol().contains(mouse)){
-							if(pressed){
-								World.getPlayer().getPlayerActions().attackRight();
-								pressed = false;
-							}
-						}
-					}
-					if(HUDManager.getLeftPol() != null){
-						if(HUDManager.getLeftPol().contains(mouse)){
-							if(pressed){
-								World.getPlayer().getPlayerActions().attackLeft();
-								pressed = false;
-							}
-						}
-					}
-				}
-			}
-		}
+//		if(World.getPlayer() != null){
+//			if(World.getPlayer().getPlayerActions().hasCompleted()){
+//				if(!World.getPlayer().getPlayerActions().attacked()){
+//					if(HUDManager.getUpPol() != null){
+//						if(HUDManager.getUpPol().contains(mouse)){
+//							if(pressed){
+//								World.getPlayer().getPlayerActions().attackUp();
+//								pressed = false;
+//							}
+//						}
+//					}
+//					if(HUDManager.getDownPol() != null){
+//						if(HUDManager.getDownPol().contains(mouse)){
+//							if(pressed){
+//								World.getPlayer().getPlayerActions().attackDown();
+//								pressed = false;
+//							}
+//						}
+//					}
+//					if(HUDManager.getRightPol() != null){
+//						if(HUDManager.getRightPol().contains(mouse)){
+//							if(pressed){
+//								World.getPlayer().getPlayerActions().attackRight();
+//								pressed = false;
+//							}
+//						}
+//					}
+//					if(HUDManager.getLeftPol() != null){
+//						if(HUDManager.getLeftPol().contains(mouse)){
+//							if(pressed){
+//								World.getPlayer().getPlayerActions().attackLeft();
+//								pressed = false;
+//							}
+//						}
+//					}
+//				}
+//			}
+//		}
 	}
 	
 	public void render(Graphics2D g){
