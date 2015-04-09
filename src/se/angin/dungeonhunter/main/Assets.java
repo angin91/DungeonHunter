@@ -54,10 +54,10 @@ public class Assets {
 		player.setSpriteSheet(LoadImageFrom.LoadImageFrom(Main.class, "EntitySheet.png"));
 
 		//PLAYER ATTACK
-		attack_up = player.getTile(0, 48, 16, 16);
-		attack_down = player.getTile(16, 48, 16, 16);
-		attack_right = player.getTile(32, 48, 16, 16);
-		attack_left = player.getTile(48, 48, 16, 16);
+		attack_up = player.getTile(0, 64+16, 16, 16);
+		attack_down = player.getTile(16, 64+16, 16, 16);
+		attack_right = player.getTile(32, 64+16, 16, 16);
+		attack_left = player.getTile(48, 64+16, 16, 16);
 		
 		//MOUSE TEXTURE
 		mouse_realesed = player.getTile(64+32, 8, 8, 8);
